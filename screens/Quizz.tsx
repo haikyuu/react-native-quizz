@@ -2,18 +2,18 @@ import { StatusBar } from 'expo-status-bar'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-type ResultsProps = Record<string, unknown>
+type QuizzProps = Record<string, unknown>
 
-const Results: React.FunctionComponent<ResultsProps> = () => {
+const Quizz: React.FunctionComponent<QuizzProps> = () => {
   return (
     <View style={styles.container}>
-      <Text>Questions</Text>
+      <Text>Quizz</Text>
       <StatusBar style='auto' />
     </View>
   )
 }
 
-export default Results
+export default Quizz
 
 const styles = StyleSheet.create({
   container: {
