@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, Button } from 'react-native'
 import { ScreenProps } from '../types/navigation'
 import Category from '../components/Category'
 import { human } from 'react-native-typography'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState, Dispatch } from '../store'
 
 const categories: Array<popularCategory> = [
@@ -23,11 +23,7 @@ const Home: React.FunctionComponent<ScreenProps> = ({
       // load category questions (10)
       await dispatch.questions.loadQuestions({ categoryId })
       // navigate to the quizz screen
-      if (categoryId === '?') {
-        console.log('random')
-      } else {
-        console.log('id', categoryId)
-      }
+      navigation.navigate('Quizz')
     },
     [dispatch]
   )

@@ -7,7 +7,7 @@ type ResultsProps = Record<string, unknown>
 const Results: React.FunctionComponent<ResultsProps> = () => {
   return (
     <View style={styles.container}>
-      <Text>Questions</Text>
+      <Text>Results</Text>
       <StatusBar style='auto' />
     </View>
   )

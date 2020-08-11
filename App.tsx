@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import Home from './screens/Home'
 import Quizz from './screens/Quizz'
+import Results from './screens/Results'
 import { RootStackParamList } from './types/navigation'
 import { Provider } from 'react-redux'
 
@@ -18,6 +19,7 @@ const App: React.FunctionComponent<AppProps> = () => {
         <Stack.Navigator initialRouteName='Home'>
           <Stack.Screen name='Home' component={Home} />
           <Stack.Screen name='Quizz' component={Quizz} />
+          <Stack.Screen name='Results' component={Results} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

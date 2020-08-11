@@ -1,18 +1,29 @@
 type popularCategory = games | animals | vehicles | music;
-
+type StringBoolean = "True" | "False"
 type QuestionType = "boolean" | "multiple"
+type Difficulty = "easy" | "medium" | "hard"
 
 interface Question {
     category: string,
     type: QuestionType,
-    difficulty: "easy" | "medium" | "hard",
+    difficulty: Difficulty,
     question: string,
     correct_answer: string,
     incorrect_answers: Array<string>
 }
 
 type BooleanQuestion = Question & {
-    question: "True" | "False",
-    incorrect_answers: ["True" | "False"],
+    correct_answer: StringBoolean,
+    incorrect_answers: [StringBoolean],
     type: "boolean"
+}
+
+type QuestionsState = {
+    questions: Array<BooleanQuestion>,
+    amount: number,
+    type: "boolean" | "multiple" | "mixed",
+    loading: boolean,
+    error: string,
+    answers: Record<number, StringBoolean>,
+    currentQuestionIndex: number
 }

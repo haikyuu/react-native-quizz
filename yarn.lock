@@ -1470,7 +1470,7 @@
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-"@rematch/core@^2.0.0-next.1":
+"@rematch/core@^2.0.0-next.0":
   version "2.0.0-next.1"
   resolved "https://registry.npmjs.org/@rematch/core/-/core-2.0.0-next.1.tgz#ef1adda39fbe6236b1919638125c2f5fd94d4fa6"
   integrity sha512-3cwHKMRpucOaAW8YSDA7Fm2VFKBlMwbPi0h0/uW+5SzKBVF6I1AjYR0a0iuW0blZ90xLGAZe809BhgYeTwg1Wg==
