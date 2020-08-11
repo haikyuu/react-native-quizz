@@ -14,6 +14,8 @@
     "@react-native-community/masked-view": "0.1.10",
     "@react-navigation/native": "^5.7.3",
     "@react-navigation/stack": "^5.9.0",
+    "@rematch/core": "^2.0.0-next.1",
+    "axios": "^0.19.2",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
     "react": "~16.11.0",
@@ -23,13 +25,16 @@
     "react-native-reanimated": "~1.9.0",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
-    "react-native-web": "~0.11.7"
+    "react-native-typography": "^1.4.1",
+    "react-native-web": "~0.11.7",
+    "react-redux": "^7.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",
     "@types/jest": "^26.0.9",
     "@types/react": "^16.9.46",
     "@types/react-native": "^0.63.6",
+    "@types/react-redux": "^7.1.9",
     "@types/react-test-renderer": "^16.9.3",
     "@typescript-eslint/eslint-plugin": "^3.8.0",
     "@typescript-eslint/parser": "^3.8.0",
