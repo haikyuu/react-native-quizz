@@ -1,8 +1,17 @@
 import * as React from 'react'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
-import { Text, StyleSheet, StyleProp } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  StyleProp,
+  Image,
+  ImageSourcePropType,
+  ViewStyle,
+  ImageStyle
+} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import { human } from 'react-native-typography'
 
 type extendedCategoryName = popularCategory | 'random'
 const popularCategories: Record<
@@ -10,23 +19,123 @@ const popularCategories: Record<
   {
     name: string
     id: string
-    icon: string
-    family?: 'ant'
+    image: ImageSourcePropType
+    styles: {
+      container: StyleProp<ViewStyle>
+      image: StyleProp<ImageStyle>
+    }
   }
 > = {
   games: {
     name: 'Video Games',
     id: '15',
-    icon: 'gamepad-variant-outline'
+    image: require('../assets/images/bunny.png'),
+    styles: {
+      container: {
+        width: 150,
+        height: 180,
+        borderRadius: 25,
+        backgroundColor: '#3ed598',
+        paddingTop: 24,
+        alignItems: 'center'
+      },
+      image: {
+        height: 90,
+        width: 79,
+        position: 'absolute',
+        bottom: 0,
+        left: 35
+      }
+    }
   },
-  vehicles: { name: 'Vehicles', id: '28', icon: 'car' },
-  music: { name: 'Music', id: '12', icon: 'music' },
-  animals: { name: 'Animals', id: '27', icon: 'dog' },
+  vehicles: {
+    name: 'Vehicles',
+    id: '28',
+    image: require('../assets/images/stack.png'),
+    styles: {
+      container: {
+        width: 150,
+        height: 209.8,
+        borderRadius: 25,
+        backgroundColor: '#ff565e',
+        paddingTop: 24,
+        alignItems: 'center'
+      },
+      image: {
+        width: 71,
+        height: 123.8,
+        position: 'absolute',
+        bottom: 0,
+        left: 35
+      }
+    }
+  },
+  music: {
+    name: 'Music',
+    id: '12',
+    image: require('../assets/images/bird.png'),
+    styles: {
+      container: {
+        width: 150,
+        height: 210,
+        borderRadius: 25,
+        backgroundColor: '#ffc542',
+        paddingTop: 24,
+        alignItems: 'center'
+      },
+      image: {
+        width: 100,
+        height: 81.8,
+        position: 'absolute',
+        bottom: 0,
+        left: 25
+      }
+    }
+  },
+  animals: {
+    name: 'Animals',
+    id: '27',
+    image: require('../assets/images/group.png'),
+    isLarge: true,
+    styles: {
+      container: {
+        height: 180,
+        width: '100%',
+        borderRadius: 25,
+        backgroundColor: '#ff565e',
+        paddingTop: 24,
+        paddingLeft: 24
+      },
+      image: {
+        width: 187,
+        height: 107,
+        position: 'absolute',
+        right: 0,
+        bottom: 0
+      }
+    }
+  },
   random: {
-    name: 'Random Category',
+    name: 'Random',
     id: 'mixed',
-    icon: 'question',
-    family: 'ant'
+    image: require('../assets/images/flying.png'),
+    styles: {
+      container: {
+        width: 150,
+        height: 150,
+        borderRadius: 25,
+        backgroundColor: '#3ed598',
+        paddingTop: 24,
+        alignItems: 'center'
+      },
+      image: {
+        height: 79,
+        width: 79,
+        position: 'absolute',
+        bottom: 0,
+        left: 35
+      }
+    }
   }
 }
 type CategoryProps = {
@@ -39,23 +148,22 @@ const Category: React.FunctionComponent<CategoryProps> = ({
   name: categoryName,
   onPress
 }: CategoryProps) => {
-  const { icon, name, id, family } = React.useMemo(
-    () => popularCategories[categoryName],
-    [categoryName]
-  )
-  const Icon = family === 'ant' ? AntDesign : MaterialCommunityIcons
+  const {
+    image,
+    name,
+    id,
+    styles: { container, image: imageStyle }
+  } = React.useMemo(() => popularCategories[categoryName], [categoryName])
   return (
-    <TouchableOpacity style={[s.container, style]} onPress={() => onPress(id)}>
-      <Icon name={icon} size={24} color='black' style={s.icon} />
-      <Text style={s.title}>{name}</Text>
+    <TouchableOpacity style={[container, style]} onPress={() => onPress(id)}>
+      <Text style={[human.title3, s.title]}>{name}</Text>
+      <Image style={imageStyle} source={image} />
     </TouchableOpacity>
   )
 }
 
 const s = StyleSheet.create({
-  container: {},
-  title: {},
-  icon: {}
+  title: { color: '#fff' }
 })
 
 export default Category

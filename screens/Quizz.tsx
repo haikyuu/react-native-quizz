@@ -4,33 +4,30 @@ import { StyleSheet, Text, View, ActivityIndicator, Button } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '../store'
 import { human } from 'react-native-typography'
-import { useNavigation } from '@react-navigation/native'
 import { ScreenProps } from '../types/navigation'
 
-type QuizzProps = Record<string, unknown>
-
-const Quizz: React.FunctionComponent<QuizzProps> = ({
+const Quizz: React.FunctionComponent<ScreenProps> = ({
   navigation
 }: ScreenProps) => {
   // get the current question from the store
 
-  const questions: QuestionsState = useSelector<RootState>(
+  const questions: QuestionsState = useSelector<RootState, QuestionsState>(
     state => state.questions
   )
   const dispatch = useDispatch<Dispatch>()
   const handleAnswer = useCallback(
     answer => {
       // store answer in the store
+      dispatch.questions.storeAnswer(answer)
       if (questions.currentQuestionIndex + 1 === questions.amount) {
         // ge to results screen
         navigation.navigate('Results')
       } else {
-        dispatch.questions.storeAnswer(answer)
         // get the next answer
         dispatch.questions.incrementQuestion()
       }
     },
-    [dispatch]
+    [dispatch, questions]
   )
   if (questions.loading) {
     //TODO:
@@ -40,6 +37,7 @@ const Quizz: React.FunctionComponent<QuizzProps> = ({
     //TODO:
     return <Text>{questions.error}</Text>
   }
+  console.log('crr', questions.currentQuestionIndex)
   const currentQuestion = questions.questions[questions.currentQuestionIndex]
   const allAnswers = [
     currentQuestion.correct_answer,

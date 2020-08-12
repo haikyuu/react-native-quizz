@@ -1,35 +1,38 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createModel } from '@rematch/core'
 import { Dispatch, RootState } from '..'
 import api from '../../utils/api'
 import config from '../../utils/config'
 
-
+const initialState: QuestionsState = {
+    questions: [],
+    // we put it here to allow the user to configure it in the future from the settings
+    amount: config.amount,
+    type: config.type,
+    difficulty: config.difficulty,
+    currentQuestionIndex: 0,
+    answers: {},
+    loading: false,
+    error: ""
+}
 export const questions = createModel<QuestionsState>()({
-    state: {
-        questions: [],
-        // we put it here to allow the user to configure it in the future from the settings
-        amount: config.amount,
-        type: config.type,
-        difficulty: config.difficulty,
-        currentQuestionIndex: 0,
-        answers: {},
-        loading: false,
-        error: ""
-    }, // initial state
+    state: initialState, // initial state
     reducers: {
-        // handle state changes with pure functions
+        reset() {
+            return initialState
+        },
         setQuestions(state, payload: Array<BooleanQuestion>) {
             console.log("p", payload);
 
             return { ...state, questions: payload }
         },
-        setLoading(state, loading) {
+        setLoading(state, loading: boolean) {
             return { ...state, loading }
         },
-        setError(state, error) {
+        setError(state, error: string) {
             return { ...state, error }
         },
-        storeAnswer(state, answer) {
+        storeAnswer(state, answer: StringBoolean) {
             return {
                 ...state, answers: {
                     ...state.answers,
@@ -58,6 +61,7 @@ export const questions = createModel<QuestionsState>()({
                 const result = await api.get(`?amount=${amount}${difficultyParam}${typeParam}${categoryParam}`)
                 setLoading(false)
                 const questions = result.data.results;
+
                 setQuestions(questions)
             } catch (error) {
                 setLoading(false)

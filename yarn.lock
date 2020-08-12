@@ -1470,7 +1470,7 @@
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-"@rematch/core@^2.0.0-next.0":
+"@rematch/core@^2.0.0-next.1":
   version "2.0.0-next.1"
   resolved "https://registry.npmjs.org/@rematch/core/-/core-2.0.0-next.1.tgz#ef1adda39fbe6236b1919638125c2f5fd94d4fa6"
   integrity sha512-3cwHKMRpucOaAW8YSDA7Fm2VFKBlMwbPi0h0/uW+5SzKBVF6I1AjYR0a0iuW0blZ90xLGAZe809BhgYeTwg1Wg==
@@ -4101,7 +4101,7 @@ hoist-non-react-statics@^2.3.1:
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.3.0, hoist-non-react-statics@^3.3.2:
   version "3.3.2"
   resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
   integrity sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==
@@ -6622,6 +6622,11 @@ react-native-screens@~2.9.0:
   resolved "https://registry.npmjs.org/react-native-screens/-/react-native-screens-2.9.0.tgz#ead2843107ba00fee259aa377582e457c74f1f3b"
   integrity sha512-5MaiUD6HA3nzY3JbVI8l3V7pKedtxQF3d8qktTVI0WmWXTI4QzqOU8r8fPVvfKo3MhOXwhWBjr+kQ7DZaIQQeg==
 
+react-native-shared-element@0.7.0:
+  version "0.7.0"
+  resolved "https://registry.npmjs.org/react-native-shared-element/-/react-native-shared-element-0.7.0.tgz#c5e02eb372f6e38e48eb1030fd59be8f3d8c7a1f"
+  integrity sha512-TJTGwQceABYete+vH3ahNSgzVzXz7X2SPv3thT91gdcFCrm7ht7IKXBXJiYjOA+4TfdqnGEAWkspCy80oEnOgw==
+
 react-native-typography@^1.4.1:
   version "1.4.1"
   resolved "https://registry.npmjs.org/react-native-typography/-/react-native-typography-1.4.1.tgz#2d05cb5935a2f7fdb6b43bbde93d60f1324578e3"
@@ -6677,6 +6682,13 @@ react-native-web@~0.11.7:
     stacktrace-parser "^0.1.3"
     use-subscription "^1.0.0"
     whatwg-fetch "^3.0.0"
+
+react-navigation-shared-element@^2.3.1:
+  version "2.3.1"
+  resolved "https://registry.npmjs.org/react-navigation-shared-element/-/react-navigation-shared-element-2.3.1.tgz#35a3ac2f42a3e8c55e60609344443725c793a9b7"
+  integrity sha512-MA2xDn9urQkgAiAhGttCtaoTW6VaseYpCB7f1CmXaj9ROYojznWxlKZuT94riGFzuiFxDMMKWFgLM6JMUf6ELA==
+  dependencies:
+    hoist-non-react-statics "^3.3.2"
 
 react-redux@^7.2.1:
   version "7.2.1"

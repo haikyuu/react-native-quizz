@@ -16,7 +16,10 @@ const App: React.FunctionComponent<AppProps> = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName='Home'>
+        <Stack.Navigator
+          initialRouteName='Home'
+          headerMode={'none'}
+        >
           <Stack.Screen name='Home' component={Home} />
           <Stack.Screen name='Quizz' component={Quizz} />
           <Stack.Screen name='Results' component={Results} />

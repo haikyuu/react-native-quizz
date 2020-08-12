@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useCallback } from 'react'
-import { StyleSheet, Text, View, Button } from 'react-native'
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import { ScreenProps } from '../types/navigation'
 import Category from '../components/Category'
 import { human } from 'react-native-typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, Dispatch } from '../store'
+import { LinearGradient } from 'expo-linear-gradient'
 
 const categories: Array<popularCategory> = [
   'animals',
@@ -29,26 +30,42 @@ const Home: React.FunctionComponent<ScreenProps> = ({
   )
 
   return (
-    <View style={styles.container}>
-      <StatusBar style='auto' />
-      <Text style={human.largeTitle}>Trivia Challenge</Text>
-      <Text style={human.title1}>Select a Category</Text>
+    <LinearGradient colors={["#4b6cb7", "#182848"]} style={s.container}>
+      <ScrollView contentContainerStyle={s.scrollViewContainer}>
+        <StatusBar style='auto' />
+        <Text style={[human.largeTitle, s.title]}>Trivia Challenge</Text>
+        <Text style={[human.title1, s.subtitle]}>Select a Category</Text>
 
-      <Category name='random' onPress={onCategoryPress} />
-      {categories.map(category => (
-        <Category key={category} name={category} onPress={onCategoryPress} />
-      ))}
-    </View>
+        <Category name='animals' onPress={onCategoryPress} />
+        <View style={s.categoryRow}>
+          <Category name='games' onPress={onCategoryPress} />
+          <Category name='music' onPress={onCategoryPress} />
+        </View>
+        <View style={s.categoryRow}>
+          <Category name='vehicles' onPress={onCategoryPress} />
+          <Category name='random' onPress={onCategoryPress} />
+        </View>
+      </ScrollView>
+    </LinearGradient>
   )
 }
 
 export default Home
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
+    paddingTop: 40
+  },
+  categoryRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 18
+  },
+  scrollViewContainer: {
+    paddingHorizontal: 28
+  },
+  title: { color: '#fff', marginBottom: 8 },
+  subtitle: { color: '#fff', marginBottom: 24 }
 })

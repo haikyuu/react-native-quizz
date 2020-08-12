@@ -1,4 +1,4 @@
-type popularCategory = games | animals | vehicles | music;
+type popularCategory = "games" | "animals" | "vehicles" | "music";
 type StringBoolean = "True" | "False"
 type QuestionType = "boolean" | "multiple"
 type Difficulty = "easy" | "medium" | "hard"
@@ -22,6 +22,7 @@ type QuestionsState = {
     questions: Array<BooleanQuestion>,
     amount: number,
     type: "boolean" | "multiple" | "mixed",
+    difficulty: Difficulty | "mixed",
     loading: boolean,
     error: string,
     answers: Record<number, StringBoolean>,
