@@ -1,4 +1,5 @@
 import * as React from 'react'
+import TouchableScale from 'react-native-touchable-scale'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { AntDesign } from '@expo/vector-icons'
 import {
@@ -8,12 +9,16 @@ import {
   Image,
   ImageSourcePropType,
   ViewStyle,
-  ImageStyle
+  ImageStyle,
+  Share,
+  View
 } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { human } from 'react-native-typography'
+import { SharedElement } from 'react-navigation-shared-element'
+import { LinearGradient } from 'expo-linear-gradient'
+import { categoryImages } from '../utils/categories'
 
-type extendedCategoryName = popularCategory | 'random'
 const popularCategories: Record<
   extendedCategoryName,
   {
@@ -29,7 +34,7 @@ const popularCategories: Record<
   games: {
     name: 'Video Games',
     id: '15',
-    image: require('../assets/images/bunny.png'),
+    image: categoryImages.games.source,
     styles: {
       container: {
         width: 150,
@@ -40,8 +45,8 @@ const popularCategories: Record<
         alignItems: 'center'
       },
       image: {
-        height: 90,
-        width: 79,
+        height: categoryImages.games.height,
+        width: categoryImages.games.width,
         position: 'absolute',
         bottom: 0,
         left: 35
@@ -51,7 +56,7 @@ const popularCategories: Record<
   vehicles: {
     name: 'Vehicles',
     id: '28',
-    image: require('../assets/images/stack.png'),
+    image: categoryImages.vehicles.source,
     styles: {
       container: {
         width: 150,
@@ -62,8 +67,8 @@ const popularCategories: Record<
         alignItems: 'center'
       },
       image: {
-        width: 71,
-        height: 123.8,
+        height: categoryImages.vehicles.height,
+        width: categoryImages.vehicles.width,
         position: 'absolute',
         bottom: 0,
         left: 35
@@ -73,7 +78,7 @@ const popularCategories: Record<
   music: {
     name: 'Music',
     id: '12',
-    image: require('../assets/images/bird.png'),
+    image: categoryImages.music.source,
     styles: {
       container: {
         width: 150,
@@ -84,8 +89,9 @@ const popularCategories: Record<
         alignItems: 'center'
       },
       image: {
-        width: 100,
-        height: 81.8,
+        height: categoryImages.music.height,
+        width: categoryImages.music.width,
+
         position: 'absolute',
         bottom: 0,
         left: 25
@@ -95,8 +101,7 @@ const popularCategories: Record<
   animals: {
     name: 'Animals',
     id: '27',
-    image: require('../assets/images/group.png'),
-    isLarge: true,
+    image: categoryImages.animals.source,
     styles: {
       container: {
         height: 180,
@@ -107,8 +112,8 @@ const popularCategories: Record<
         paddingLeft: 24
       },
       image: {
-        width: 187,
-        height: 107,
+        height: categoryImages.animals.height,
+        width: categoryImages.animals.width,
         position: 'absolute',
         right: 0,
         bottom: 0
@@ -118,7 +123,7 @@ const popularCategories: Record<
   random: {
     name: 'Random',
     id: 'mixed',
-    image: require('../assets/images/flying.png'),
+    image: categoryImages.random.source,
     styles: {
       container: {
         width: 150,
@@ -129,8 +134,8 @@ const popularCategories: Record<
         alignItems: 'center'
       },
       image: {
-        height: 79,
-        width: 79,
+        height: categoryImages.random.height,
+        width: categoryImages.random.width,
         position: 'absolute',
         bottom: 0,
         left: 35
@@ -139,14 +144,15 @@ const popularCategories: Record<
   }
 }
 type CategoryProps = {
-  style?: StyleProp<TouchableOpacity>
+  style?: StyleProp<ViewStyle>
   name: extendedCategoryName
-  onPress: (id: string) => void
+  onPress: (id: string, categoryName: extendedCategoryName) => void
+  isQuizzContainer?: boolean
 }
 const Category: React.FunctionComponent<CategoryProps> = ({
   style,
   name: categoryName,
-  onPress
+  onPress,
 }: CategoryProps) => {
   const {
     image,
@@ -155,10 +161,14 @@ const Category: React.FunctionComponent<CategoryProps> = ({
     styles: { container, image: imageStyle }
   } = React.useMemo(() => popularCategories[categoryName], [categoryName])
   return (
-    <TouchableOpacity style={[container, style]} onPress={() => onPress(id)}>
-      <Text style={[human.title3, s.title]}>{name}</Text>
-      <Image style={imageStyle} source={image} />
-    </TouchableOpacity>
+    <TouchableScale onPress={() => onPress(id, categoryName)}>
+      <View style={container}>
+        <Text style={[human.title2, s.title]}>{name}</Text>
+        <SharedElement id={categoryName} style={imageStyle}>
+          <Image style={imageStyle} source={image} />
+        </SharedElement>
+      </View>
+    </TouchableScale>
   )
 }
 

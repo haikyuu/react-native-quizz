@@ -1,4 +1,5 @@
 type popularCategory = "games" | "animals" | "vehicles" | "music";
+type extendedCategoryName = popularCategory | 'random'
 type StringBoolean = "True" | "False"
 type QuestionType = "boolean" | "multiple"
 type Difficulty = "easy" | "medium" | "hard"

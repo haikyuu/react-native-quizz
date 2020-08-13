@@ -7,7 +7,7 @@ import { human } from 'react-native-typography'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState, Dispatch } from '../store'
 import { LinearGradient } from 'expo-linear-gradient'
-
+import { SharedElement } from 'react-navigation-shared-element'
 const categories: Array<popularCategory> = [
   'animals',
   'games',
@@ -20,22 +20,21 @@ const Home: React.FunctionComponent<ScreenProps> = ({
 }: ScreenProps) => {
   const dispatch = useDispatch<Dispatch>()
   const onCategoryPress = useCallback(
-    async (categoryId: string) => {
+    async (categoryId: string, category: extendedCategoryName) => {
       // load category questions (10)
       await dispatch.questions.loadQuestions({ categoryId })
       // navigate to the quizz screen
-      navigation.navigate('Quizz')
+      navigation.navigate('Quizz', { category })
     },
     [dispatch]
   )
 
   return (
-    <LinearGradient colors={["#4b6cb7", "#182848"]} style={s.container}>
+    <LinearGradient colors={['#4b6cb7', '#182848']} style={s.container}>
       <ScrollView contentContainerStyle={s.scrollViewContainer}>
         <StatusBar style='auto' />
         <Text style={[human.largeTitle, s.title]}>Trivia Challenge</Text>
         <Text style={[human.title1, s.subtitle]}>Select a Category</Text>
-
         <Category name='animals' onPress={onCategoryPress} />
         <View style={s.categoryRow}>
           <Category name='games' onPress={onCategoryPress} />
