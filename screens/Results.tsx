@@ -1,15 +1,19 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useCallback } from 'react'
 import { StyleSheet, Text, View, ScrollView, Button } from 'react-native'
-import { ScreenProps } from '../types/navigation'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '../store'
 import { AntDesign } from '@expo/vector-icons'
-type ResultsProps = Record<string, unknown>
+import { LinearGradient } from 'expo-linear-gradient'
+import { ResultsProps } from '../types/navigation'
+import { human } from 'react-native-typography'
+import * as Animatable from 'react-native-animatable'
+import { AllHtmlEntities as Entities } from 'html-entities'
+const entities = new Entities()
 
-const Results: React.FunctionComponent<ScreenProps> = ({
+const Results: React.FunctionComponent<ResultsProps> = ({
   navigation
-}: ScreenProps) => {
+}: ResultsProps) => {
   const { score, amount, questionsWithAnswers } = useSelector<
     RootState,
     {
@@ -37,28 +41,74 @@ const Results: React.FunctionComponent<ScreenProps> = ({
     dispatch.questions.reset()
     navigation.navigate('Home')
   }, [navigation, dispatch])
+  const resultText = score < 6 ? 'No luck!' : 'Lucky!!'
   return (
-    <View style={styles.container}>
-      <ScrollView>
-        <Text>You Scored {`${score}/${amount}`}</Text>
+    <LinearGradient colors={['#4b6cb7', '#182848']} style={styles.container}>
+      <View style={styles.topContainer}>
+        <View style={styles.resultsContainer}>
+          <Animatable.Text
+            animation='zoomIn'
+            style={[human.title1, styles.score]}
+          >
+            {score}
+          </Animatable.Text>
+          <View>
+            <Text style={[human.title1, styles.resultText]}>{resultText}</Text>
+            <View style={styles.detailsRow}>
+              <View style={[styles.dot, { backgroundColor: '#3dd598' }]}></View>
+              <Text
+                style={[human.body, styles.detailsText]}
+              >{`${score} correct answers`}</Text>
+            </View>
+            <View style={styles.detailsRow}>
+              <View style={[styles.dot, { backgroundColor: '#ff575f' }]}></View>
+              <Text style={[human.body, styles.detailsText]}>{`${amount -
+                score} incorrect answers`}</Text>
+            </View>
+          </View>
+        </View>
+
+        <Button title='Play Again' onPress={playAgain} color='#4b6cb7' />
+      </View>
+      <ScrollView contentContainerStyle={styles.questionsContainer}>
         {questionsWithAnswers.map(
           ({ isCorrect, question, correct_answer, answer }) => (
-            <View key={question}>
-              {isCorrect ? (
-                <AntDesign name='checkcircle' size={24} color='green' />
-              ) : (
-                <AntDesign name='closecircle' size={24} color='red' />
-              )}
-              <Text>{question}</Text>
-              {!isCorrect ? <Text>{answer}</Text> : null}
-              <Text>{correct_answer}</Text>
+            <View
+              key={question}
+              style={[
+                styles.questionContainer,
+                isCorrect ? styles.greenContainer : styles.redContainer
+              ]}
+            >
+              <View
+                style={[
+                  styles.questionBox,
+                  isCorrect ? styles.greenBox : styles.redBox
+                ]}
+              >
+                <Text
+                  style={[
+                    human.bodyWhite,
+                    styles.answer,
+                    isCorrect ? styles.correctAnswer : styles.incorrectAnswer
+                  ]}
+                >
+                  {answer}
+                </Text>
+              </View>
+              <Text
+                style={[human.body, styles.questionText]}
+                ellipsizeMode='tail'
+                numberOfLines={4}
+              >
+                {Entities.decode(question)}
+              </Text>
             </View>
           )
         )}
-        <Button title='Play Again' onPress={playAgain} />
-        <StatusBar style='auto' />
       </ScrollView>
-    </View>
+      <StatusBar style='auto' />
+    </LinearGradient>
   )
 }
 
@@ -68,7 +118,73 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff'
+
     // alignItems: 'center',
-    // justifyContent: 'center'
+    // justifyContent: 'center',
+  },
+  topContainer: {
+    width: 375,
+    height: 265,
+    backgroundColor: '#ffc542'
+  },
+  resultsContainer: {
+    height: 156,
+    borderRadius: 25,
+    backgroundColor: '#ffffff',
+    marginHorizontal: 28,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    marginTop: 60,
+    padding: 24,
+    marginBottom: 5
+  },
+  score: {
+    fontSize: 100,
+    lineHeight: 100,
+    color: '#182848',
+    marginTop: 16
+  },
+  detailsRow: { flexDirection: 'row', alignItems: 'center' },
+  dot: {
+    width: 15,
+    height: 10,
+    borderRadius: 6,
+    marginRight: 8
+  },
+  resultText: {
+    marginBottom: 12,
+    color: '#182848'
+  },
+  detailsText: { color: '#899a96' },
+  questionContainer: {
+    height: 105,
+    borderRadius: 25,
+    marginHorizontal: 25,
+    marginBottom: 18,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 24
+  },
+  questionBox: {
+    width: 59,
+    height: 57,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  greenBox: { backgroundColor: '#3dd598' },
+  redBox: { backgroundColor: '#ff565e' },
+  greenContainer: { backgroundColor: 'rgba(61, 213, 152, .6)' },
+  redContainer: { backgroundColor: 'rgba(255, 87, 95, .6)' },
+  questionsContainer: { marginTop: 24 },
+  questionText: { color: 'white', flexShrink: 1, marginLeft: 16 },
+  answer: {},
+  correctAnswer: {},
+  incorrectAnswer: {
+    textDecorationLine: 'line-through',
+    textDecorationStyle: 'solid',
+    textDecorationColor: 'blue'
   }
 })
