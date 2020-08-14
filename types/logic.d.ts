@@ -29,3 +29,6 @@ type QuestionsState = {
     answers: Record<number, StringBoolean>,
     currentQuestionIndex: number
 }
+type SettingsState = {
+    isMusicOn: boolean,
+}

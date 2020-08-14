@@ -9,6 +9,7 @@ import { ResultsProps } from '../types/navigation'
 import { human } from 'react-native-typography'
 import * as Animatable from 'react-native-animatable'
 import { AllHtmlEntities as Entities } from 'html-entities'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 const entities = new Entities()
 
 const Results: React.FunctionComponent<ResultsProps> = ({
@@ -38,6 +39,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({
   })
   const dispatch = useDispatch<Dispatch>()
   const playAgain = useCallback(() => {
+    dispatch.settings.playClickSound()
     dispatch.questions.reset()
     navigation.navigate('Home')
   }, [navigation, dispatch])
@@ -68,7 +70,9 @@ const Results: React.FunctionComponent<ResultsProps> = ({
           </View>
         </View>
 
-        <Button title='Play Again' onPress={playAgain} color='#4b6cb7' />
+        <TouchableOpacity onPress={playAgain} style={styles.playAgainContainer}>
+          <Text style={[human.title3]}>Play Again</Text>
+        </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.questionsContainer}>
         {questionsWithAnswers.map(
@@ -107,7 +111,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({
           )
         )}
       </ScrollView>
-      <StatusBar style='auto' />
+      <StatusBar style='dark' />
     </LinearGradient>
   )
 }
@@ -124,7 +128,7 @@ const styles = StyleSheet.create({
   },
   topContainer: {
     width: 375,
-    height: 265,
+    height: 235,
     backgroundColor: '#ffc542'
   },
   resultsContainer: {
@@ -135,7 +139,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-around',
     alignItems: 'center',
-    marginTop: 60,
+    marginTop: 10,
     padding: 24,
     marginBottom: 5
   },
@@ -179,12 +183,16 @@ const styles = StyleSheet.create({
   greenContainer: { backgroundColor: 'rgba(61, 213, 152, .6)' },
   redContainer: { backgroundColor: 'rgba(255, 87, 95, .6)' },
   questionsContainer: { marginTop: 24 },
-  questionText: { color: 'white', flexShrink: 1, marginLeft: 16 },
+  questionText: { color: 'white', flexShrink: 1, marginLeft: 16, flex: 1 },
   answer: {},
   correctAnswer: {},
   incorrectAnswer: {
     textDecorationLine: 'line-through',
     textDecorationStyle: 'solid',
     textDecorationColor: 'blue'
+  },
+  playAgainContainer: {
+    alignSelf: 'center',
+    paddingVertical: 16
   }
 })

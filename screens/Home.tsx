@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import { ScreenProps } from '../types/navigation'
 import Category from '../components/Category'
@@ -19,6 +19,9 @@ const Home: React.FunctionComponent<ScreenProps> = ({
   navigation
 }: ScreenProps) => {
   const dispatch = useDispatch<Dispatch>()
+  useEffect(() => {
+    dispatch.settings.playMusic()
+  }, [])
   const onCategoryPress = useCallback(
     async (categoryId: string, category: extendedCategoryName) => {
       // load category questions (10)
@@ -32,7 +35,7 @@ const Home: React.FunctionComponent<ScreenProps> = ({
   return (
     <LinearGradient colors={['#4b6cb7', '#182848']} style={s.container}>
       <ScrollView contentContainerStyle={s.scrollViewContainer}>
-        <StatusBar style='auto' />
+        <StatusBar style='light' />
         <Text style={[human.largeTitle, s.title]}>Trivia Challenge</Text>
         <Text style={[human.title1, s.subtitle]}>Select a Category</Text>
         <Category name='animals' onPress={onCategoryPress} />

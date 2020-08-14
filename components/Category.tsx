@@ -18,6 +18,8 @@ import { human } from 'react-native-typography'
 import { SharedElement } from 'react-navigation-shared-element'
 import { LinearGradient } from 'expo-linear-gradient'
 import { categoryImages } from '../utils/categories'
+import { useDispatch } from 'react-redux'
+import { Dispatch } from '../store'
 
 const popularCategories: Record<
   extendedCategoryName,
@@ -152,7 +154,7 @@ type CategoryProps = {
 const Category: React.FunctionComponent<CategoryProps> = ({
   style,
   name: categoryName,
-  onPress,
+  onPress
 }: CategoryProps) => {
   const {
     image,
@@ -160,8 +162,14 @@ const Category: React.FunctionComponent<CategoryProps> = ({
     id,
     styles: { container, image: imageStyle }
   } = React.useMemo(() => popularCategories[categoryName], [categoryName])
+  const dispatch = useDispatch<Dispatch>()
   return (
-    <TouchableScale onPress={() => onPress(id, categoryName)}>
+    <TouchableScale
+      onPress={() => {
+        onPress(id, categoryName)
+        dispatch.settings.playClickSound()
+      }}
+    >
       <View style={container}>
         <Text style={[human.title2, s.title]}>{name}</Text>
         <SharedElement id={categoryName} style={imageStyle}>

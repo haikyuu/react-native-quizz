@@ -88,13 +88,16 @@ const Quizz: React.FunctionComponent<QuizzProps> = ({
       {allAnswers.map(answer => (
         <TouchableOpacity
           key={`${answer}${questions.currentQuestionIndex}`}
-          onPress={() => handleAnswer(answer)}
+          onPress={async () => {
+            handleAnswer(answer)
+            await dispatch.settings.playClickSound()
+          }}
           style={styles.button}
         >
           <Text style={human.title2White}>{answer}</Text>
         </TouchableOpacity>
       ))}
-      <StatusBar style='auto' />
+      <StatusBar style='light' />
       <SharedElement id={route.params.category} style={imageStyle}>
         <Image
           // random in the render function will make the image move on every render :)
