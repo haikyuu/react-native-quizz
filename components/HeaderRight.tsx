@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { TouchableOpacity } from 'react-native'
-import { connect, useDispatch } from 'react-redux'
+import { connect } from 'react-redux'
 import { Entypo } from '@expo/vector-icons'
-import { RootState, Dispatch } from '../store'
+import { RootState } from '../store'
 
 const mapState = (state: RootState) => ({ isMusicOn: state.settings.isMusicOn })
 

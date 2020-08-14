@@ -1,16 +1,14 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useCallback } from 'react'
-import { StyleSheet, Text, View, ScrollView, Button } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import { RootState, Dispatch } from '../store'
-import { AntDesign } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 import { ResultsProps } from '../types/navigation'
 import { human } from 'react-native-typography'
 import * as Animatable from 'react-native-animatable'
 import { AllHtmlEntities as Entities } from 'html-entities'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-const entities = new Entities()
 
 const Results: React.FunctionComponent<ResultsProps> = ({
   navigation
@@ -76,7 +74,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({
       </View>
       <ScrollView contentContainerStyle={styles.questionsContainer}>
         {questionsWithAnswers.map(
-          ({ isCorrect, question, correct_answer, answer }) => (
+          ({ isCorrect, question, answer }) => (
             <View
               key={question}
               style={[
