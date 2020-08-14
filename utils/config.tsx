@@ -1,13 +1,13 @@
 interface Config {
-  amount: number
-  type: QuestionType | 'mixed'
-  difficulty: Difficulty | 'mixed'
+  amount: number;
+  type: QuestionType | "mixed";
+  difficulty: Difficulty | "mixed";
 }
 
 const config: Config = {
   amount: 10,
-  type: 'boolean',
-  difficulty: 'mixed'
-}
+  type: "boolean",
+  difficulty: "mixed",
+};
 
-export default config
+export default config;
