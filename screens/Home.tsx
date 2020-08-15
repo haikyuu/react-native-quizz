@@ -29,7 +29,6 @@ const Home: React.FunctionComponent<HomeProps> = ({
     <LinearGradient colors={["#4b6cb7", "#182848"]} style={s.container}>
       <ScrollView contentContainerStyle={s.scrollViewContainer}>
         <StatusBar style="light" />
-        <Text style={[human.largeTitle, s.title]}>Trivia Challenge</Text>
         <Text style={[human.title1, s.subtitle]}>Select a Category</Text>
         <Category name="animals" onPress={onCategoryPress} />
         <View style={s.categoryRow}>
@@ -51,15 +50,16 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 40,
+    paddingTop: 8,
   },
   categoryRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     marginTop: 18,
   },
   scrollViewContainer: {
-    paddingHorizontal: 28,
+    paddingHorizontal: 8,
+    justifyContent: "space-around",
   },
   title: { color: "#fff", marginBottom: 8 },
   subtitle: { color: "#fff", marginBottom: 24 },

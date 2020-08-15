@@ -164,7 +164,7 @@ const Category: React.FunctionComponent<CategoryProps> = ({
         dispatch.settings.playClickSound();
       }}
     >
-      <View style={container}>
+      <View style={[container, { overflow: "hidden" }]}>
         <Text style={[human.title2, s.title]}>{name}</Text>
         <SharedElement id={categoryName} style={imageStyle}>
           <Image style={imageStyle} source={image} />
@@ -175,7 +175,7 @@ const Category: React.FunctionComponent<CategoryProps> = ({
 };
 
 const s = StyleSheet.create({
-  title: { color: "#fff" },
+  title: { color: "#fff", fontWeight: "500" },
 });
 
 export default Category;

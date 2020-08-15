@@ -65,7 +65,13 @@ export const settings = createModel<SettingsState>()({
       await soundObject.pauseAsync();
       setMusicState(false);
     },
-    async playClickSound() {
+    async playClickSound(_, rootState) {
+      const {
+        settings: { isMusicOn },
+      } = rootState as RootState;
+      if (!isMusicOn) {
+        return;
+      }
       const { isLoaded } = await clickSoundObject.getStatusAsync();
       if (!isLoaded) {
         await clickSoundObject.loadAsync(clickSound);

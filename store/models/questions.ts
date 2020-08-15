@@ -22,8 +22,6 @@ export const questions = createModel<QuestionsState>()({
       return initialState;
     },
     setQuestions(state, payload: Array<BooleanQuestion>) {
-      console.log("p", payload);
-
       return { ...state, questions: payload };
     },
     setLoading(state, loading: boolean) {
@@ -56,12 +54,15 @@ export const questions = createModel<QuestionsState>()({
     // use async/await for async actions
     async loadQuestions({ categoryId }: { categoryId: string }, rootState) {
       const {
-        questions: { setLoading, setError, setQuestions },
+        questions: { reset, setLoading, setError, setQuestions },
       } = dispatch as Dispatch;
       const {
         questions: { amount, type, difficulty },
       } = rootState as RootState;
 
+      // useful when using the back button to go to the
+      // home screen when the quizz is in progress
+      reset();
       const typeParam = type === "mixed" ? "" : `&type=${type}`;
       const difficultyParam =
         difficulty === "mixed" ? "" : `&difficulty=${difficulty}`;
