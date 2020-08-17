@@ -1,0 +1,85 @@
+{
+  "response_code": 0,
+  "results": [
+    {
+      "category": "Entertainment: Video Games",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The Indie Game Development Studio Cing, developers of Hotel Dusk and Last Window, went bankrupt on March 1st, 2010.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Geography",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "Israel is 7 hours ahead of New York.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Science & Nature",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "Type 1 diabetes is a result of the liver working improperly.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Entertainment: Japanese Anime & Manga",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "The anime Attack on Titan was directed by Tetsurō Araki, the same person who directed the anime Highschool of the Dead.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "The main playable character of the 2015 RPG &quot;Undertale&quot; is a monster.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Entertainment: Video Games",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "In Splatoon, the Squid Sisters are named Tako and Yaki.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Mythology",
+      "type": "boolean",
+      "difficulty": "medium",
+      "question": "In Greek mythology, Hera is the goddess of harvest.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Animals",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "Cats have whiskers under their legs.",
+      "correct_answer": "True",
+      "incorrect_answers": ["False"]
+    },
+    {
+      "category": "Mythology",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A wyvern is the same as a dragon.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    },
+    {
+      "category": "Science: Mathematics",
+      "type": "boolean",
+      "difficulty": "easy",
+      "question": "A scalene triangle has two sides of equal length.",
+      "correct_answer": "False",
+      "incorrect_answers": ["True"]
+    }
+  ]
+}
