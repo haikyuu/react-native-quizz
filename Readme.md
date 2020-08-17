@@ -1,10 +1,14 @@
 ## Steps to run the project
 
-You can watch a video of the app in action [here](https://www.loom.com/share/59045c7258d14c4bab84f15263542397).
+You can watch a 📹 video of the app in action [here](https://www.loom.com/share/59045c7258d14c4bab84f15263542397).
 
-Here are some screenshots:
+And here are some screenshots:
 
-![Home Screen](./assets/screenshots/home.jpeg "Home Screen") ![Quizz Screen](./assets/screenshots/quizz.jpeg "Quizz Screen") ![Results Screen](./assets/screenshots/results.jpeg "Results Screen")
+<p float="left" align="middle">
+  <img src="./assets/screenshots/home.jpeg" width="150" />
+  <img src="./assets/screenshots/quizz.jpeg" width="150" /> 
+  <img src="./assets/screenshots/results.jpeg" width="150" />
+</p>
 
 To try the app, visit this [link](https://expo.io/@haikyuu/challenge?release-channel=production). Note you will need to install the expo app to try it on your phone. You can also try it in the browser in the same link.
 
