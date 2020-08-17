@@ -56,6 +56,10 @@ const App: React.FunctionComponent<AppProps> = () => {
               headerTitleStyle: human.title2,
               headerStyle: { backgroundColor: "#ffc542" },
               headerTintColor: "black",
+              headerLeft: () => null,
+            }}
+            sharedElementsConfig={() => {
+              return undefined;
             }}
           />
         </Stack.Navigator>

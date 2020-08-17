@@ -4,7 +4,6 @@ import React, { useCallback, useMemo, useState } from "react";
 import {
   StyleSheet,
   Text,
-  ActivityIndicator,
   Image,
   TouchableOpacity,
   StyleProp,
@@ -18,7 +17,6 @@ import { LinearGradient } from "expo-linear-gradient";
 import { categoryImages } from "../utils/categories";
 import { SharedElement } from "react-navigation-shared-element";
 import { AllHtmlEntities as Entities } from "html-entities";
-import { useFocusEffect } from "@react-navigation/native";
 const entities = new Entities();
 const Quizz: React.FunctionComponent<QuizzProps> = ({
   navigation,
@@ -31,16 +29,6 @@ const Quizz: React.FunctionComponent<QuizzProps> = ({
     (state) => state.questions
   );
   const dispatch = useDispatch<Dispatch>();
-  useFocusEffect(
-    React.useCallback(() => {
-      // Do something when the screen is focused
-      setAboutToLeave(false);
-      return () => {
-        // Do something when the screen is unfocused
-        // Useful for cleanup functions
-      };
-    }, [])
-  );
   const handleAnswer = useCallback(
     (answer) => {
       // store answer in the store
@@ -62,19 +50,6 @@ const Quizz: React.FunctionComponent<QuizzProps> = ({
     return entities.decode(currentQuestion?.question);
   }, [currentQuestion]);
   const imageLeft = useMemo(() => `${(0.2 + Math.random()) * 30}%`, []);
-  if (questions.loading) {
-    //TODO:
-    return <ActivityIndicator />;
-  }
-  if (questions.error) {
-    //TODO:
-    return <Text>{questions.error}</Text>;
-  }
-
-  const allAnswers = [
-    currentQuestion.correct_answer,
-    ...currentQuestion.incorrect_answers,
-  ].sort((a, b) => b.localeCompare(a));
   const categoryImage = categoryImages[route.params.category];
   const imageStyle: StyleProp<ImageStyle> = {
     width: categoryImage.width,
@@ -83,6 +58,29 @@ const Quizz: React.FunctionComponent<QuizzProps> = ({
     left: imageLeft,
     bottom: 0,
   };
+  // navigation is done after loading the questions
+  if (questions.error) {
+    //TODO:
+    return (
+      <LinearGradient colors={["#4b6cb7", "#182848"]} style={styles.container}>
+        <Text style={[human.title1White]}>Oops, There was an error!</Text>
+        <Text style={human.title2White}>{questions.error}</Text>
+        <SharedElement id={route.params.category} style={[imageStyle]}>
+          <Image
+            // random in the render function will make the image move on every render :)
+            style={[imageStyle, isAboutToLeave ? { opacity: 0 } : {}]}
+            source={categoryImage.source}
+          />
+        </SharedElement>
+      </LinearGradient>
+    );
+  }
+
+  const allAnswers = [
+    currentQuestion.correct_answer,
+    ...currentQuestion.incorrect_answers,
+  ].sort((a, b) => b.localeCompare(a));
+
   return (
     <LinearGradient colors={["#4b6cb7", "#182848"]} style={styles.container}>
       <Text style={[human.title1White]}>
