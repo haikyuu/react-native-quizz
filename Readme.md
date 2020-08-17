@@ -73,3 +73,13 @@ Animations, music and sounds are a must for games. So I used a nice music that's
 The user can control the music from the header.
 
 Music's license is a free one that can be seen here: https://www.bensound.com
+
+## Misc
+
+Some useful tools used in the project:
+
+- Prettier: format code
+- Eslint: linting
+- Husky & lint-staged: ensure prettier and eslint are run on each commit
+- Typescript
+- Jest: Unit testing
