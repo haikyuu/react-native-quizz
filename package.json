@@ -51,6 +51,7 @@
     "eslint-plugin-react": "^7.20.5",
     "husky": ">=4",
     "jest": "^26.3.0",
+    "jest-expo": "^38.0.2",
     "lint-staged": ">=10",
     "prettier": "2.0.5",
     "typescript": "^3.9.7"
