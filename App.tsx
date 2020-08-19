@@ -23,6 +23,7 @@ const App: React.FunctionComponent<AppProps> = () => {
             headerTintColor: "white",
             // eslint-disable-next-line react/display-name
             headerRight: ({ tintColor }: { tintColor?: string }) => (
+              // Type of property 'settings' circularly references itself in mapped type 'ExtractRematchDispatchersFromModels<RootModel & Models<any>>'.ts(2615)
               <HeaderRight
                 tintColor={tintColor}
                 toggleMusic={store.dispatch.settings.toggleMusic}

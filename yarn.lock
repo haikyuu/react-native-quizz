@@ -1470,10 +1470,10 @@
     color "^3.1.2"
     react-native-iphone-x-helper "^1.2.1"
 
-"@rematch/core@^2.0.0-next.1":
-  version "2.0.0-next.1"
-  resolved "https://registry.npmjs.org/@rematch/core/-/core-2.0.0-next.1.tgz#ef1adda39fbe6236b1919638125c2f5fd94d4fa6"
-  integrity sha512-3cwHKMRpucOaAW8YSDA7Fm2VFKBlMwbPi0h0/uW+5SzKBVF6I1AjYR0a0iuW0blZ90xLGAZe809BhgYeTwg1Wg==
+"@rematch/core@^2.0.0-next.2":
+  version "2.0.0-next.2"
+  resolved "https://registry.yarnpkg.com/@rematch/core/-/core-2.0.0-next.2.tgz#b593099d6513ec76c4e42cce3c553b07cb9f52bf"
+  integrity sha512-mFpamBlk1nPQQ0iRsEGDGEQzTtdMgpvWABoYq48b63hA9mQphcyog3G4x0Fcn4wcv8YDRNQHtW8p8mFJskza9g==
 
 "@sinonjs/commons@^1.7.0":
   version "1.8.1"

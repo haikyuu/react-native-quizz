@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createModel } from "@rematch/core";
-import { Dispatch, RootState } from "..";
 import api from "../../utils/api";
 import config from "../../utils/config";
+import { RootModel } from "./";
+import { RootState } from "..";
 
 const initialState: QuestionsState = {
   questions: [],
@@ -15,7 +16,8 @@ const initialState: QuestionsState = {
   loading: false,
   error: "",
 };
-export const questions = createModel<QuestionsState>()({
+
+export const questions = createModel<RootModel>()({
   state: initialState, // initial state
   reducers: {
     reset() {
@@ -55,9 +57,10 @@ export const questions = createModel<QuestionsState>()({
     async loadQuestions({ categoryId }: { categoryId: string }, rootState) {
       const {
         questions: { reset, setLoading, setError, setQuestions },
-      } = dispatch as Dispatch;
+      } = dispatch;
       const {
         questions: { amount, type, difficulty },
+        // todo: 1st is this as necessary?
       } = rootState as RootState;
 
       // useful when using the back button to go to the
@@ -81,8 +84,6 @@ export const questions = createModel<QuestionsState>()({
         setLoading(false);
         setError(error.message);
       }
-
-      // typedDispatch.questions.setQuestions(result)
     },
   }),
 });
