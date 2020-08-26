@@ -24,7 +24,7 @@ const App: React.FunctionComponent<AppProps> = () => {
           screenOptions={{
             headerTitle: "Trivia",
             headerTintColor: "white",
-            // eslint-disable--line react/display-name
+            // eslint-disable-next-line react/display-name
             headerRight: ({ tintColor }: { tintColor?: string }) => (
               <HeaderRight
                 tintColor={tintColor}

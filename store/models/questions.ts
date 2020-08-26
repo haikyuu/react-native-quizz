@@ -3,7 +3,6 @@ import { createModel } from "@rematch/core";
 import api from "../../utils/api";
 import config from "../../utils/config";
 import { RootModel } from "./";
-import { RootState } from "..";
 
 const initialState: QuestionsState = {
   questions: [],
@@ -54,14 +53,13 @@ export const questions = createModel<RootModel>()({
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async loadQuestions({ categoryId }: { categoryId: string }, rootState) {
+    async loadQuestions({ categoryId }: { categoryId: string }, state) {
       const {
         questions: { reset, setLoading, setError, setQuestions },
       } = dispatch;
       const {
         questions: { amount, type, difficulty },
-        // todo: 1st is this as necessary?
-      } = rootState as RootState;
+      } = state;
 
       // useful when using the back button to go to the
       // home screen when the quizz is in progress

@@ -2,7 +2,6 @@
 import { createModel } from "@rematch/core";
 import { Audio } from "expo-av";
 import { RootModel } from ".";
-import { RootState } from "..";
 const soundTrack = require("../../assets/sounds/music.mp3");
 const clickSound = require("../../assets/sounds/click.wav");
 
@@ -43,13 +42,13 @@ export const settings = createModel<RootModel>()({
       // when you are done using the Sound object
       // await soundObject.unloadAsync();
     },
-    async toggleMusic(_, rootState) {
+    async toggleMusic(_, state) {
       const {
         settings: { stopMusic, playMusic, setMusicState },
       } = dispatch;
       const {
         settings: { isMusicOn },
-      } = rootState as RootState;
+      } = state;
 
       if (isMusicOn) {
         setMusicState(false);
@@ -67,10 +66,10 @@ export const settings = createModel<RootModel>()({
       await soundObject.pauseAsync();
       setMusicState(false);
     },
-    async playClickSound(_, rootState) {
+    async playClickSound(_, state) {
       const {
         settings: { isMusicOn },
-      } = rootState as RootState;
+      } = state;
       if (!isMusicOn) {
         return;
       }
