@@ -18,10 +18,7 @@ describe("Questions Model", () => {
     const store = init({
       models,
     });
-    // 2n todo
-    // Type of property 'questions' circularly references itself in mapped type
-    // 'ExtractRematchDispatchersFromModels<RootModel & Models<any>>'.ts(2615)
-
+ 
     await store.dispatch.questions.loadQuestions({ categoryId: "mixed" });
     const questionsState = store.getState().questions;
     expect(questionsState.questions.length).toBe(questionsState.amount);
