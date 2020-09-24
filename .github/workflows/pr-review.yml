@@ -24,3 +24,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           msg: App is ready for review, you can [see it here](https://expo.io/@haikyuu/challenge?release-channel=pr-${{ github.event.number }}).
+      - name: Notify slack
+        env:
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+        uses: pullreminders/slack-action@master
+        with:
+          args: '{\"channel\":\"C01B4LXPHTQ\",\"text\":\"App is ready for review here https://expo.io/@haikyuu/challenge?release-channel=pr-${{ github.event.number }}\"}'
