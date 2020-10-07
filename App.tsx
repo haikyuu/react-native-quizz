@@ -4,15 +4,18 @@ import Home from "./screens/Home";
 import Quizz from "./screens/Quizz";
 import Results from "./screens/Results";
 import { RootStackParamList } from "./types/navigation";
-import { Provider } from "react-redux";
+import { Provider, useDispatch } from "react-redux";
 import { createSharedElementStackNavigator } from "react-navigation-shared-element";
 import store from "./store";
 import { human } from "react-native-typography";
 import HeaderRight from "./components/HeaderRight";
+import { Dispatch } from "./store";
 type AppProps = Record<string, unknown>;
 
 const Stack = createSharedElementStackNavigator<RootStackParamList>();
 const App: React.FunctionComponent<AppProps> = () => {
+  const dispatch = useDispatch<Dispatch>();
+
   return (
     <Provider store={store}>
       <NavigationContainer>
@@ -25,7 +28,7 @@ const App: React.FunctionComponent<AppProps> = () => {
             headerRight: ({ tintColor }: { tintColor?: string }) => (
               <HeaderRight
                 tintColor={tintColor}
-                toggleMusic={store.dispatch.settings.toggleMusic}
+                toggleMusic={dispatch.settings.toggleMusic}
               />
             ),
             headerTitleStyle: human.title2White,

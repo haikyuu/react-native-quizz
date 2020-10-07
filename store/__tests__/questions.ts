@@ -1,5 +1,5 @@
 import { init } from "@rematch/core";
-import { questions } from "../models/questions";
+import { models } from "../models";
 import api from "../../utils/api";
 
 const mockedApi = api as jest.Mocked<typeof api>;
@@ -16,8 +16,9 @@ jest.mock("../../utils/api.ts", () => {
 describe("Questions Model", () => {
   it("Questions should be loaded from the api and stored in the state correctly", async () => {
     const store = init({
-      models: { questions },
+      models,
     });
+ 
     await store.dispatch.questions.loadQuestions({ categoryId: "mixed" });
     const questionsState = store.getState().questions;
     expect(questionsState.questions.length).toBe(questionsState.amount);
@@ -25,7 +26,7 @@ describe("Questions Model", () => {
   it("Errors should be gracefully handled when loading questions", async () => {
     const errorMessage = "Network Error";
     const store = init({
-      models: { questions },
+      models,
     });
 
     mockedApi.get.mockImplementation(async () => {
@@ -41,7 +42,7 @@ describe("Questions Model", () => {
 describe("Incrementing questions when passing the quizz", () => {
   it("Increments the question when below 10", async () => {
     const store = init({
-      models: { questions },
+      models,
     });
     await store.dispatch.questions.loadQuestions({ categoryId: "mixed" });
     store.dispatch.questions.incrementQuestion();
@@ -50,7 +51,7 @@ describe("Incrementing questions when passing the quizz", () => {
   });
   it("Increments the question is a noop when index = 10", async () => {
     const store = init({
-      models: { questions },
+      models,
     });
     await store.dispatch.questions.loadQuestions({ categoryId: "mixed" });
     for (let i = 0; i < 11; i++) {

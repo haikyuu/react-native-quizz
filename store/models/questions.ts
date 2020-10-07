@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { createModel } from "@rematch/core";
-import { Dispatch, RootState } from "..";
 import api from "../../utils/api";
 import config from "../../utils/config";
+import { RootModel } from "./";
 
 const initialState: QuestionsState = {
   questions: [],
@@ -15,7 +15,8 @@ const initialState: QuestionsState = {
   loading: false,
   error: "",
 };
-export const questions = createModel<QuestionsState>()({
+
+export const questions = createModel<RootModel>()({
   state: initialState, // initial state
   reducers: {
     reset() {
@@ -52,13 +53,13 @@ export const questions = createModel<QuestionsState>()({
   effects: (dispatch) => ({
     // handle state changes with impure functions.
     // use async/await for async actions
-    async loadQuestions({ categoryId }: { categoryId: string }, rootState) {
+    async loadQuestions({ categoryId }: { categoryId: string }, state) {
       const {
         questions: { reset, setLoading, setError, setQuestions },
-      } = dispatch as Dispatch;
+      } = dispatch;
       const {
         questions: { amount, type, difficulty },
-      } = rootState as RootState;
+      } = state;
 
       // useful when using the back button to go to the
       // home screen when the quizz is in progress
@@ -81,8 +82,6 @@ export const questions = createModel<QuestionsState>()({
         setLoading(false);
         setError(error.message);
       }
-
-      // typedDispatch.questions.setQuestions(result)
     },
   }),
 });

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 import { createModel } from "@rematch/core";
-import { Dispatch, RootState } from "..";
 import { Audio } from "expo-av";
+import { RootModel } from ".";
 const soundTrack = require("../../assets/sounds/music.mp3");
 const clickSound = require("../../assets/sounds/click.wav");
 
@@ -10,7 +10,8 @@ const soundObject = new Audio.Sound();
 const initialState: SettingsState = {
   isMusicOn: true,
 };
-export const settings = createModel<SettingsState>()({
+
+export const settings = createModel<RootModel>()({
   state: initialState, // initial state
   reducers: {
     reset() {
@@ -26,7 +27,7 @@ export const settings = createModel<SettingsState>()({
     async playMusic() {
       const {
         settings: { setMusicState },
-      } = dispatch as Dispatch;
+      } = dispatch;
 
       const { isLoaded } = await soundObject.getStatusAsync();
       if (!isLoaded) {
@@ -41,13 +42,13 @@ export const settings = createModel<SettingsState>()({
       // when you are done using the Sound object
       // await soundObject.unloadAsync();
     },
-    async toggleMusic(_, rootState) {
+    async toggleMusic(_, state) {
       const {
         settings: { stopMusic, playMusic, setMusicState },
-      } = dispatch as Dispatch;
+      } = dispatch;
       const {
         settings: { isMusicOn },
-      } = rootState as RootState;
+      } = state;
 
       if (isMusicOn) {
         setMusicState(false);
@@ -60,15 +61,15 @@ export const settings = createModel<SettingsState>()({
     async stopMusic() {
       const {
         settings: { setMusicState },
-      } = dispatch as Dispatch;
+      } = dispatch;
 
       await soundObject.pauseAsync();
       setMusicState(false);
     },
-    async playClickSound(_, rootState) {
+    async playClickSound(_, state) {
       const {
         settings: { isMusicOn },
-      } = rootState as RootState;
+      } = state;
       if (!isMusicOn) {
         return;
       }
